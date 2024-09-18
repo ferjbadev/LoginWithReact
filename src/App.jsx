@@ -1,9 +1,19 @@
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './components/Home';
+import { Login } from './components/Login';
+import { Register } from './components/Register';
 
-export default function App() {
+
+function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className="bg-slate-300">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Routes>
+    </div>
   )
 }
+
+export default App; 
