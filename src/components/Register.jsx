@@ -33,8 +33,13 @@ export function Register() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-300 to-green-400">
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm space-y-4">
+                <div>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                        Create your account
+                    </h2>
+                </div>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 underline">
                         Email
@@ -64,9 +69,16 @@ export function Register() {
                 <div className="flex justify-center">
                     <button
                         type="submit"
-                        className="bg-green-500 hover:bg-green-700 text-white focus:ring-4 font-medium rounded-lg w-auto px-5 py-3"
-                    >
+                        className="flex justify-center py-3 px-8 border-2 border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Register
+                    </button>
+                </div>
+                <div className="mt-6">
+                    <button
+                        type='button'
+                        onClick={() => navigate('/Login')}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Already have an account? Sign in
                     </button>
                 </div>
             </form>

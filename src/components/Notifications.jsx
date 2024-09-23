@@ -23,6 +23,30 @@ export const ToastNotifications = {
             padding: '16px',
             color: '#ffffff',
             background: '#cc390d'
-        },
-    })
+        }
+    }),
+
+    notifyLogin: () => toast.success("The Login was successfully!", {
+        duration: 4000,
+        position: 'top-center',
+        style: {
+            fontSize: '24px',
+            fontWeight: 'bold',
+            padding: '16px',
+            color: '#ffffff',
+            background: '#0dcc5d'
+        }
+    }),
+
+    notifyErrorLogin: () => toast.success("Error in Login!", {
+        duration: 4000,
+        position: 'top-center',
+        style: {
+            fontSize: '24px',
+            fontWeight: 'bold',
+            padding: '16px',
+            color: '#ffffff',
+            background: '#0dcc5d'
+        }
+    }),
 }

@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { ToastNotifications } from '../components/Notifications';
+
 
 export function Login() {
     const [user, setUser] = useState({
@@ -20,14 +22,21 @@ export function Login() {
         e.preventDefault();
         try {
             await login(user.email, user.password);
-            navigate('/');
+            ToastNotifications.notifyLogin();
+            setTimeout(() => navigate('/Profile'), 3000);
         } catch (error) {
             setError(error.message);
+            ToastNotifications.notifyErrorLogin();
         }
     }
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm space-y-4">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-300 to-red-400">
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm space-y-6">
+                <div>
+                    <h2 className="text-center text-3xl font-extrabold text-gray-900 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+                        Sign in to your Account
+                    </h2>
+                </div>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 underline">
                         Email
@@ -54,12 +63,42 @@ export function Login() {
                         onChange={handleChange} // Captura los cambios
                     />
                 </div>
+
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <input
+                            id="remember-me"
+                            name="remember-me"
+                            type="checkbox"
+                            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        />
+                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                            Remember me
+                        </label>
+                    </div>
+                    <div className="text-sm">
+                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                            Forgot your password?
+                        </a>
+                    </div>
+                </div>
+
+
+
                 <div className="flex justify-center">
                     <button
                         type="submit"
-                        className="bg-green-500 hover:bg-green-700 text-white focus:ring-4 font-medium rounded-lg w-auto px-5 py-3"
+                        className="flex justify-center py-3 px-8 border-2 border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Login
+                        Sign in
+                    </button>
+                </div>
+                <div className="mt-6">
+                    <button
+                        type='button'
+                        onClick={() => navigate('/Register')}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Don't have an account? Sign up!
                     </button>
                 </div>
             </form>
