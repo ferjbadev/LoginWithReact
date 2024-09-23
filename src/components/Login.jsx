@@ -1,32 +1,33 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { ToastNotifications } from '../components/Notifications';
 
 
 export function Login() {
+    // Estado inicial de los datos de usuario
     const [user, setUser] = useState({
         email: '',
         password: ''
     });
 
-    const { login } = useAuth();
+    const { login } = useAuth(); // Funcion de login
     const navigate = useNavigate();
-    const [error, setError] = useState('');
+    const [error, setError] = useState(''); // Error de inicio de sesión
 
+    // Funcion para manejar los cambios del input
     const handleChange = ({ target: { name, value } }) => {
+        // Actualiza el estado del usuario
         setUser({ ...user, [name]: value });
     }
 
+    // Para manejar el envio del formulario
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Evita que se recargue la pagina
         try {
-            await login(user.email, user.password);
-            ToastNotifications.notifyLogin();
-            setTimeout(() => navigate('/Profile'), 3000);
+            await login(user.email, user.password); // Inicia seccion 
+            setTimeout(() => navigate('/Profile'), 3000); // Muestra el componente Profile despues de 3 segundos
         } catch (error) {
-            setError(error.message);
-            ToastNotifications.notifyErrorLogin();
+            setError(error.message); // Captura el error y lo muestra
         }
     }
     return (

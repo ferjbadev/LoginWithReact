@@ -1,34 +1,33 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import { ToastNotifications } from '../components/Notifications';
 
 export function Register() {
+    // Estado inicial de los datos de usuario
     const [user, setUser] = useState({
         email: "",
         password: ""
     });
 
 
-    const { signUp } = useAuth();
+    const { signUp } = useAuth(); // Funcion de registro
     const navigate = useNavigate();
-    const [error, setError] = useState('');
+    const [error, setError] = useState(''); // Error de inicio de sesión
 
-
+    // Función para manejar cambios en los inputs del formulario
     const handleChange = ({ target: { name, value } }) => {
+        // Actualiza el estado del usuario
         setUser({ ...user, [name]: value });
     };
 
+    // Para manejar el envio del formulario
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Evita que se recargue la pagina
         try {
-            await signUp(user.email, user.password);
-            ToastNotifications.notifyRegister(); // Solo notifica éxito si el registro fue exitoso
-            setTimeout(() => navigate('/'), 3000);
+            await signUp(user.email, user.password); // Registra un usuario
+            setTimeout(() => navigate('/Login'), 3000); // Muestra el componente Login despues de 3 segundos
         } catch (error) {
-            setError(error.message);
-            ToastNotifications.notifyError(error.message); // Muestra el mensaje de error
+            setError(error.message); // Captura el error y lo muestra
         }
     };
 
@@ -82,7 +81,6 @@ export function Register() {
                     </button>
                 </div>
             </form>
-            <Toaster />
         </div>
     );
 }

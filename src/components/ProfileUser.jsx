@@ -1,14 +1,15 @@
 import { useAuth } from "../context/AuthContext";
-import { ToastNotifications } from "../components/Notifications";
 
 export const ProfileUser = () => {
 
     const { user, logout, loading } = useAuth();
 
+    // Si loading is True muestra un mensaje de Cargando
     if (loading) {
         return <div>Loading...</div>;
     }
 
+    // funcion para cerrar sesion
     const handleLogout = async () => {
         await logout();
     };
